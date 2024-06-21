@@ -16,7 +16,13 @@ public class Notification {
     private String message;
     private Timestamp dateNotification;
 
-    // Additional fields and relationships if needed
+    @ManyToOne
+    @JoinColumn(name = "ticket_id")
+    private Ticket ticket;
+
+    @ManyToOne
+    @JoinColumn(name = "utilisateur_id")
+    private Utilisateur utilisateur;
 
     // Getters and Setters
 }

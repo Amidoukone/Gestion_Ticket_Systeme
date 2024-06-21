@@ -24,6 +24,10 @@ public class Ticket {
     @ManyToOne
     private Utilisateur apprenant;
 
+    public Utilisateur getFormateur() {
+        return null;
+    }
+
     //@OneToMany(mappedBy = "ticket")
     //private List<Reponse> reponses;
 
