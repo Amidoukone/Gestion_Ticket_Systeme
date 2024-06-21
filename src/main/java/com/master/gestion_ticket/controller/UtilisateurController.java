@@ -1,7 +1,5 @@
 package com.master.gestion_ticket.controller;
 
-
-
 import com.master.gestion_ticket.entity.Utilisateur;
 import com.master.gestion_ticket.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,4 +38,3 @@ public class UtilisateurController {
         return ResponseEntity.noContent().build();
     }
 }
-

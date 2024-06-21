@@ -1,6 +1,5 @@
 package com.master.gestion_ticket.controller;
 
-
 import com.master.gestion_ticket.entity.Notification;
 import com.master.gestion_ticket.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,4 +38,3 @@ public class NotificationController {
         return ResponseEntity.noContent().build();
     }
 }
-

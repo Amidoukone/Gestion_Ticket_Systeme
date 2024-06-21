@@ -1,6 +1,5 @@
 package com.master.gestion_ticket.controller;
 
-
 import com.master.gestion_ticket.entity.Ticket;
 import com.master.gestion_ticket.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;

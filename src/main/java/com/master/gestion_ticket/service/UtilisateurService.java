@@ -1,7 +1,5 @@
 package com.master.gestion_ticket.service;
 
-
-
 import com.master.gestion_ticket.entity.Utilisateur;
 import com.master.gestion_ticket.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +29,3 @@ public class UtilisateurService {
         utilisateurRepository.deleteById(id);
     }
 }
-

@@ -1,10 +1,13 @@
 package com.master.gestion_ticket.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.List;
+
+@Getter
+@Setter
 @Entity
 public class Utilisateur {
     @Id
@@ -15,46 +18,11 @@ public class Utilisateur {
     private String motDePasse;
     private String role;
 
-    // Getters
-    public Long getId() {
-        return id;
-    }
+    //@OneToMany(mappedBy = "apprenant")
+    //private List<Ticket> tickets;
 
-    public String getNom() {
-        return nom;
-    }
+    //@OneToMany(mappedBy = "formateur")
+    //private List<Reponse> reponses;
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getMotDePasse() {
-        return motDePasse;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    // Setters
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
+    // Getters and Setters
 }
-

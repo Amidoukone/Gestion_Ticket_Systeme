@@ -1,6 +1,5 @@
 package com.master.gestion_ticket.service;
 
-
 import com.master.gestion_ticket.entity.Ticket;
 import com.master.gestion_ticket.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +29,3 @@ public class TicketService {
         ticketRepository.deleteById(id);
     }
 }
-

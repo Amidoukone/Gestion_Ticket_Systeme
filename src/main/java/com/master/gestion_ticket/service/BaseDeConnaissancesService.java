@@ -1,6 +1,5 @@
 package com.master.gestion_ticket.service;
 
-
 import com.master.gestion_ticket.entity.BaseDeConnaissances;
 import com.master.gestion_ticket.repository.BaseDeConnaissancesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +29,3 @@ public class BaseDeConnaissancesService {
         baseDeConnaissancesRepository.deleteById(id);
     }
 }
-

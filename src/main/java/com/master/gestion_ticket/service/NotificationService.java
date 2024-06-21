@@ -1,7 +1,5 @@
 package com.master.gestion_ticket.service;
 
-
-
 import com.master.gestion_ticket.entity.Notification;
 import com.master.gestion_ticket.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +29,3 @@ public class NotificationService {
         notificationRepository.deleteById(id);
     }
 }
-

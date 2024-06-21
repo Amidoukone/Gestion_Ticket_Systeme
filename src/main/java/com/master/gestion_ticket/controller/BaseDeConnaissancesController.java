@@ -1,6 +1,5 @@
 package com.master.gestion_ticket.controller;
 
-
 import com.master.gestion_ticket.entity.BaseDeConnaissances;
 import com.master.gestion_ticket.service.BaseDeConnaissancesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,8 @@ public class BaseDeConnaissancesController {
 
     @GetMapping
     public ResponseEntity<List<BaseDeConnaissances>> getAllBaseDeConnaissances() {
-        List<BaseDeConnaissances> baseDeConnaissancesList = baseDeConnaissancesService.getAllBaseDeConnaissances();
-        return ResponseEntity.ok(baseDeConnaissancesList);
+        List<BaseDeConnaissances> baseDeConnaissances = baseDeConnaissancesService.getAllBaseDeConnaissances();
+        return ResponseEntity.ok(baseDeConnaissances);
     }
 
     @PutMapping("/{id}")
