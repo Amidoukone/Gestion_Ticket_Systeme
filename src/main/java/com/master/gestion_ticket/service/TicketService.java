@@ -1,9 +1,11 @@
+// TicketService.java
 package com.master.gestion_ticket.service;
 
-import com.master.gestion_ticket.entity.Ticket;
 import com.master.gestion_ticket.entity.Notification;
+import com.master.gestion_ticket.entity.Ticket;
 import com.master.gestion_ticket.entity.Utilisateur;
 import com.master.gestion_ticket.repository.TicketRepository;
+import com.master.gestion_ticket.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +20,19 @@ public class TicketService {
     @Autowired
     private NotificationService notificationService;
 
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
+
     public Ticket createTicket(Ticket ticket) {
+        // Assuming ticket.formateur is just the ID or not fully loaded
+        Utilisateur formateur = utilisateurRepository.findById(ticket.getFormateur().getId()).orElse(null);
+        if (formateur != null) {
+            ticket.setFormateur(formateur);
+        }
+
         Ticket createdTicket = ticketRepository.save(ticket);
 
         // Create a notification for the formateur when a new ticket is created
-        Utilisateur formateur = ticket.getFormateur();
         if (formateur != null) {
             Notification notification = new Notification();
             notification.setMessage("Un nouveau ticket a été créé par " + ticket.getApprenant().getNom());

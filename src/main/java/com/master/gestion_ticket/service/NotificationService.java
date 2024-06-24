@@ -4,8 +4,6 @@ import com.master.gestion_ticket.entity.Notification;
 import com.master.gestion_ticket.entity.Ticket;
 import com.master.gestion_ticket.entity.Utilisateur;
 import com.master.gestion_ticket.repository.NotificationRepository;
-import com.master.gestion_ticket.repository.TicketRepository;
-import com.master.gestion_ticket.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +14,6 @@ import java.util.List;
 public class NotificationService {
     @Autowired
     private NotificationRepository notificationRepository;
-
-    @Autowired
-    private TicketRepository ticketRepository;
-
-    @Autowired
-    private UtilisateurRepository utilisateurRepository;
 
     public Notification createNotification(Notification notification) {
         return notificationRepository.save(notification);
@@ -46,8 +38,8 @@ public class NotificationService {
             Notification notification = new Notification();
             notification.setMessage("Un ticket a été répondu par " + formateur.getNom());
             notification.setDateNotification(new Timestamp(System.currentTimeMillis()));
-            notification.setTicket(ticket);
-            notification.setUtilisateur(formateur);
+            notification.setTicket(ticket);  // Set ticket reference
+            notification.setUtilisateur(formateur); // Set utilisateur reference
             return notificationRepository.save(notification);
         }
         return null;

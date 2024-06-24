@@ -1,9 +1,12 @@
+
 package com.master.gestion_ticket.service;
 
 import com.master.gestion_ticket.entity.Reponse;
 import com.master.gestion_ticket.entity.Ticket;
+import com.master.gestion_ticket.entity.BaseDeConnaissances;
 import com.master.gestion_ticket.repository.ReponseRepository;
 import com.master.gestion_ticket.repository.TicketRepository;
+import com.master.gestion_ticket.repository.BaseDeConnaissancesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,9 @@ public class ReponseService {
     @Autowired
     private TicketRepository ticketRepository;
 
+    @Autowired
+    private BaseDeConnaissancesRepository baseDeConnaissancesRepository;
+
     public Reponse createReponse(Long ticketId, Reponse reponse) {
         Ticket ticket = ticketRepository.findById(ticketId).orElseThrow(() -> new RuntimeException("Ticket not found"));
         reponse.setTicket(ticket);
@@ -31,6 +37,15 @@ public class ReponseService {
         //ticketRepository.save(ticket);
 
         return savedReponse;
+    }
+
+    public void addReponseToKnowledgeBase(Long ticketId, String titre, String contenu) {
+        Ticket ticket = ticketRepository.findById(ticketId).orElseThrow(() -> new RuntimeException("Ticket not found"));
+        BaseDeConnaissances baseDeConnaissances = new BaseDeConnaissances();
+        baseDeConnaissances.setTitre(titre);
+        baseDeConnaissances.setContenu(contenu);
+
+        baseDeConnaissancesRepository.save(baseDeConnaissances);
     }
 
     public List<Reponse> getAllReponses() {

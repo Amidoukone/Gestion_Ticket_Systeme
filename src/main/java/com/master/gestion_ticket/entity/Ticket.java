@@ -1,3 +1,4 @@
+
 package com.master.gestion_ticket.entity;
 
 import jakarta.persistence.*;
@@ -5,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @Getter
 @Setter
@@ -24,9 +24,8 @@ public class Ticket {
     @ManyToOne
     private Utilisateur apprenant;
 
-    public Utilisateur getFormateur() {
-        return null;
-    }
+    @ManyToOne
+    private Utilisateur formateur;
 
     //@OneToMany(mappedBy = "ticket")
     //private List<Reponse> reponses;

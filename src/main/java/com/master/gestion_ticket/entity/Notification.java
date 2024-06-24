@@ -9,11 +9,15 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @Entity
+@Table(name = "notification")
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String message;
+
+    @Column(name = "date_notification")
     private Timestamp dateNotification;
 
     @ManyToOne
@@ -23,6 +27,4 @@ public class Notification {
     @ManyToOne
     @JoinColumn(name = "utilisateur_id")
     private Utilisateur utilisateur;
-
-    // Getters and Setters
 }
