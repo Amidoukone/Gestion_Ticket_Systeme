@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -25,22 +26,22 @@ public class TicketService {
 
     public Ticket createTicket(Ticket ticket) {
         // Assuming ticket.formateur is just the ID or not fully loaded
-        Utilisateur formateur = utilisateurRepository.findById(ticket.getFormateur().getId()).orElse(null);
-        if (formateur != null) {
-            ticket.setFormateur(formateur);
-        }
-
+        // Utilisateur formateur = utilisateurRepository.findById(ticket.getFormateur().getId()).orElse(null);
+      //  if (formateur != null) {
+        //    ticket.setFormateur(formateur);
+       // }
+        ticket.setDateCreation(new Date());
         Ticket createdTicket = ticketRepository.save(ticket);
 
         // Create a notification for the formateur when a new ticket is created
-        if (formateur != null) {
+       // if (formateur != null) {
             Notification notification = new Notification();
             notification.setMessage("Un nouveau ticket a été créé par " + ticket.getApprenant().getNom());
             notification.setDateNotification(new Timestamp(System.currentTimeMillis()));
             notification.setTicket(createdTicket);
-            notification.setUtilisateur(formateur);
+            notification.setUtilisateur(ticket.getFormateur());
             notificationService.createNotification(notification);
-        }
+       // }
 
         return createdTicket;
     }
