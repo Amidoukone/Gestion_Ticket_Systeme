@@ -2,19 +2,22 @@ package com.master.gestion_ticket.controller;
 
 import com.master.gestion_ticket.entity.Ticket;
 import com.master.gestion_ticket.service.TicketService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/tickets")
+@AllArgsConstructor
 public class TicketController {
-    @Autowired
     private TicketService ticketService;
 
-    @PostMapping
+    @PreAuthorize(("hasRole('APPRENANT')"))
+    @PostMapping("/t")
     public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
         Ticket createdTicket = ticketService.createTicket(ticket);
         return ResponseEntity.ok(createdTicket);

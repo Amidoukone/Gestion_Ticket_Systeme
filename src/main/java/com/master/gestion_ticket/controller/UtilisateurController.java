@@ -2,8 +2,10 @@ package com.master.gestion_ticket.controller;
 
 import com.master.gestion_ticket.entity.Utilisateur;
 import com.master.gestion_ticket.service.UtilisateurService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -12,19 +14,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/utilisateurs")
+@AllArgsConstructor
 public class UtilisateurController {
-    @Autowired
+    //@Autowired
     private UtilisateurService utilisateurService;
-    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    @PreAuthorize(("hasRole('ADMIN')"))
     @PostMapping
-    public ResponseEntity<Utilisateur> createUtilisateur(@RequestBody Utilisateur utilisateur) {
-        passwordEncoder.encode(utilisateur.getPassword());
-        Utilisateur createdUtilisateur = utilisateurService.createUtilisateur(utilisateur);
-        return ResponseEntity.ok(createdUtilisateur);
+    public Utilisateur createUtilisateur(@RequestBody Utilisateur utilisateur) {
+        //Utilisateur createdUtilisateur = utilisateurService.createUtilisateur(utilisateur);
+        //return ResponseEntity.ok(createdUtilisateur);
+        return utilisateurService.createUtilisateur(utilisateur);
     }
 
-    @GetMapping("/list")
+    @GetMapping
     public ResponseEntity<List<Utilisateur>> getAllUtilisateurs() {
         List<Utilisateur> utilisateurs = utilisateurService.getAllUtilisateurs();
         return ResponseEntity.ok(utilisateurs);

@@ -6,23 +6,30 @@ import com.master.gestion_ticket.entity.Ticket;
 import com.master.gestion_ticket.entity.Utilisateur;
 import com.master.gestion_ticket.repository.TicketRepository;
 import com.master.gestion_ticket.repository.UtilisateurRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+@AllArgsConstructor
 @Service
+
 public class TicketService {
-    @Autowired
+    //@Autowired
     private TicketRepository ticketRepository;
 
-    @Autowired
+    //@Autowired
     private NotificationService notificationService;
 
-    @Autowired
+    //@Autowired
     private UtilisateurRepository utilisateurRepository;
+
+    private PasswordEncoder passwordEncoder;
+
 
     public Ticket createTicket(Ticket ticket) {
         // Assuming ticket.formateur is just the ID or not fully loaded

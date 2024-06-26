@@ -23,13 +23,20 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.userDetailsService(userDetailsService);
-        http.csrf(csrf -> csrf.disable()).authorizeHttpRequests((requests) -> {
-                //requests.requestMatchers("/api/**").permitAll();
-                requests.requestMatchers("/api/tickets").hasRole("APPRENANT");
-                requests.requestMatchers("/api/utilisateurs/**").hasRole("ADMIN");
-            }
-        ).httpBasic(withDefaults());
+       // http.userDetailsService(userDetailsService);
+        //http.csrf(csrf -> csrf.disable()).authorizeHttpRequests((requests) -> {
+        http
+                .csrf(csrf -> csrf.disable())
+                        .authorizeHttpRequests(authorizedRequests ->
+                                authorizedRequests
+                                //requests.requestMatchers("/api/**").permitAll();
+                                // requests.requestMatchers("/api/tickets/**").hasRole("APPRENANT")
+                                        .requestMatchers("/login", "/regidter").permitAll()
+                                        .requestMatchers("/api/tickets/**").hasRole("APPRENANT")
+                                        .requestMatchers("/api/utilisateurs/**").hasRole("ADMIN")
+                                        .requestMatchers("/api/reponses/**").hasAnyRole("ADMIN", "FORMATEUR", "APPRENANT")
+                                        .anyRequest().authenticated()
+                        ).httpBasic(withDefaults());
 
         return http.build();
     }

@@ -5,6 +5,7 @@ import com.master.gestion_ticket.entity.Reponse;
 import com.master.gestion_ticket.service.ReponseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,13 +16,14 @@ public class ReponseController {
     @Autowired
     private ReponseService reponseService;
 
+    @PreAuthorize(("hasRole('FORMATEUR')"))
     @PostMapping("/{ticketId}")
     public ResponseEntity<Reponse> createReponse(@PathVariable Long ticketId, @RequestBody Reponse reponse) {
         Reponse createdReponse = reponseService.createReponse(ticketId, reponse);
         return ResponseEntity.ok(createdReponse);
     }
 
-    @GetMapping
+    @GetMapping("/R")
     public ResponseEntity<List<Reponse>> getAllReponses() {
         List<Reponse> reponses = reponseService.getAllReponses();
         return ResponseEntity.ok(reponses);
