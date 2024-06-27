@@ -8,6 +8,9 @@ import com.master.gestion_ticket.repository.TicketRepository;
 import com.master.gestion_ticket.repository.UtilisateurRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,11 +35,18 @@ public class TicketService {
 
 
     public Ticket createTicket(Ticket ticket) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        Utilisateur apprenant = utilisateurRepository.findByEmail1(email);
+        ticket.setApprenant(apprenant);
         // Assuming ticket.formateur is just the ID or not fully loaded
         // Utilisateur formateur = utilisateurRepository.findById(ticket.getFormateur().getId()).orElse(null);
       //  if (formateur != null) {
         //    ticket.setFormateur(formateur);
        // }
+
+
+
         ticket.setDateCreation(new Date());
         Ticket createdTicket = ticketRepository.save(ticket);
 

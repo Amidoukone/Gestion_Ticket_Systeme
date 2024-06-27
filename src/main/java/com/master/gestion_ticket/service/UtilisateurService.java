@@ -19,6 +19,7 @@ public class UtilisateurService {
 
     private PasswordEncoder passwordEncoder;
 
+
     public Utilisateur createUtilisateur(Utilisateur utilisateur) {
         utilisateur.setMotDePasse(passwordEncoder.encode(utilisateur.getMotDePasse()));
         return utilisateurRepository.save(utilisateur);
