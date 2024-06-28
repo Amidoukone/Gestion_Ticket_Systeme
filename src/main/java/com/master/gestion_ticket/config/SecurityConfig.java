@@ -33,6 +33,7 @@ public class SecurityConfig {
                                 authorizedRequests
                                 //requests.requestMatchers("/api/**").permitAll();
                                 // requests.requestMatchers("/api/tickets/**").hasRole("APPRENANT")
+                                        .requestMatchers("swagger-ui/**").permitAll()
                                         .requestMatchers("/login", "/regidter").permitAll()
                                         .requestMatchers("/api/tickets/**").hasRole("APPRENANT")
                                         .requestMatchers("/api/utilisateurs/**").hasRole("ADMIN")

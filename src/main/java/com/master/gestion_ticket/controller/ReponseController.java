@@ -2,6 +2,9 @@
 package com.master.gestion_ticket.controller;
 
 import com.master.gestion_ticket.entity.Reponse;
+import com.master.gestion_ticket.entity.Utilisateur;
+import com.master.gestion_ticket.service.EmailService;
+import com.master.gestion_ticket.repository.UtilisateurRepository;
 import com.master.gestion_ticket.service.ReponseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,11 @@ import java.util.List;
 public class ReponseController {
     @Autowired
     private ReponseService reponseService;
+
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
+
+
 
     @PreAuthorize(("hasRole('FORMATEUR')"))
     @PostMapping("/{ticketId}")

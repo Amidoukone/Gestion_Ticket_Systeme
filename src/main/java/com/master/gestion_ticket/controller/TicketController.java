@@ -5,6 +5,8 @@ import com.master.gestion_ticket.entity.Utilisateur;
 import com.master.gestion_ticket.repository.UtilisateurRepository;
 import com.master.gestion_ticket.service.EmailService;
 import com.master.gestion_ticket.service.TicketService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/tickets")
+@Tag(name = "Controller Tcket",description = "End point de base pour effectuer des operations sur les tickets")
 @AllArgsConstructor
 public class TicketController {
 
@@ -21,7 +24,9 @@ public class TicketController {
     private final UtilisateurRepository utilisateurRepository;
     private final EmailService emailService;
 
+
     @PreAuthorize("hasRole('APPRENANT')")
+    @Operation(summary = "Cet end point permet de créer un nouveau ticket par un appprenant")
     @PostMapping("/t")
     public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
         Ticket createdTicket = ticketService.createTicket(ticket);

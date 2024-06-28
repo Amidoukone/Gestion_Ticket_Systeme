@@ -30,7 +30,7 @@ public class Ticket {
     @JoinColumn(name = "formateur_id")
     private Utilisateur formateur;
 
-    @OneToMany(mappedBy = "ticket")
-    private Set<Reponse> reponses;
+    //@OneToMany(mappedBy = "ticket")
+   // private Set<Reponse> reponses;
 
 }
