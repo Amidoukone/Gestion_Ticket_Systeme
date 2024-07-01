@@ -43,7 +43,7 @@ public class ReponseService {
         // Envoyer l'email à l'apprenant
         String emailApprenant = apprenant.getEmail();
         String subject = "Réponse au Ticket";
-        String body = "Un nouveau ticket a été répondu par " + currentFormateur.getNom();
+        String body = "Salut, votre ticket a été répondu par notre Formateur " + currentFormateur.getNom();
         emailService.sendSimpleMessage(emailApprenant, subject, body);
 
         // Mettre à jour la réponse

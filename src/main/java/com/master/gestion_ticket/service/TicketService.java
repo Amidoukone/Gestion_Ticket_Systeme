@@ -76,21 +76,6 @@ public class TicketService {
         ticketRepository.deleteById(id);
     }
 
-    public Ticket respondToTicket(Long id, String response, Long formateurId) {
-        // Logic to respond to a ticket and create a notification
-        Ticket ticket = ticketRepository.findById(id).orElseThrow(() -> new RuntimeException("Ticket not found"));
-        ticket.setEtat("Répondu");
-        ticketRepository.save(ticket);
-
-        Notification notification = new Notification();
-        notification.setMessage("Un ticket a été répondu par " + ticket.getFormateur().getNom());
-        notification.setDateNotification(new Timestamp(System.currentTimeMillis()));
-        notification.setTicket(ticket);
-        notification.setUtilisateur(ticket.getFormateur());
-        notificationService.createNotification(notification);
-
-        return ticket;
-    }
 
     public Ticket getTicketById(Long id) {
         return ticketRepository.findById(id).orElse(null);

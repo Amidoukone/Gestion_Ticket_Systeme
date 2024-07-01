@@ -38,6 +38,7 @@ public class SecurityConfig {
                                         .requestMatchers("/api/tickets/**").hasRole("APPRENANT")
                                         .requestMatchers("/api/utilisateurs/**").hasRole("ADMIN")
                                         .requestMatchers("/api/reponses/**").hasAnyRole("ADMIN", "FORMATEUR", "APPRENANT")
+                                        .requestMatchers("/api/base-de-connaissances/**").hasAnyRole("ADMIN", "FORMATEUR", "APPRENANT")
                                         .anyRequest().authenticated()
                         ).httpBasic(withDefaults());
 
